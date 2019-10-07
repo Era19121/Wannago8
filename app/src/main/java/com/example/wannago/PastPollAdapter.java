@@ -20,10 +20,10 @@ import java.util.List;
  */
 public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Polls> mValues;
     //private final OnListFragmentInteractionListener mListener;
 
-    public PastPollAdapter(List<DummyItem> items) {
+    public PastPollAdapter(List<Polls> items) {
         mValues = items;
         //mListener = listener;
     }
@@ -31,15 +31,20 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
     @Override
     public PollHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_polls2, parent, false);
+                .inflate(R.layout.fragment_polls_past, parent, false);
         return new PollHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PollHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.dest.setText(mValues.get(position).getDest());
+        holder.price.setText(mValues.get(position).getPrice());
+        holder.time.setText(mValues.get(position).getTime());
+        holder.date.setText(mValues.get(position).getDate());
+        holder.seats.setText("Seats Available :"+mValues.get(position).getSeat());
+
+
 
         /*holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,20 +68,26 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
 
     public class PollHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView dest;
+        public final TextView price;
+        public final TextView time;
+        public final TextView date;
+        public final TextView seats;
+        public Polls mItem;
 
         public PollHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            dest = (TextView) view.findViewById(R.id.dest_r);
+            price= (TextView) view.findViewById(R.id.price_r);
+            time= (TextView) view.findViewById(R.id.time_r);
+            date= (TextView) view.findViewById(R.id.date_r);
+            seats=(TextView) view.findViewById(R.id.seat);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + dest.getText() + "'";
         }
     }
 }

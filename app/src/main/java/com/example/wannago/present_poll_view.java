@@ -19,7 +19,6 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.wannago.dummy.DummyContent;
 import com.example.wannago.dummy.DummyContent.DummyItem;
 
 import java.util.Calendar;
@@ -57,7 +56,7 @@ public class present_poll_view extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_polls_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_polls_list_present, container, false);
 
         // Set the adapter
         if (view.findViewById(R.id.list) instanceof RecyclerView) {
@@ -68,7 +67,7 @@ public class present_poll_view extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new PresentPollAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new PresentPollAdapter(poll_list.get().getPolls()));
         }
         time=(TextView) view.findViewById(R.id.time);
         //time_p=(TextView)view.findViewById(R.id.time_p);
@@ -123,6 +122,7 @@ public class present_poll_view extends Fragment {
                 k.setVisibility(View.GONE);
             }
         });
+
         return view;
         //card
 

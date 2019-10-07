@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wannago.dummy.DummyContent;
 import com.example.wannago.dummy.DummyContent.DummyItem;
 
 /**
@@ -44,7 +43,7 @@ public class past_poll_view extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_polls_list2, container, false);
+        View view = inflater.inflate(R.layout.fragment_polls_list_past, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -55,7 +54,7 @@ public class past_poll_view extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new PastPollAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new PastPollAdapter(poll_list.get().getPolls()));
         }
         return view;
     }

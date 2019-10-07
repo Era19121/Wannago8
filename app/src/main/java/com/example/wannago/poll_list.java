@@ -8,9 +8,7 @@ public class poll_list {
     private poll_list() {
         mPolls=new ArrayList<>();
         for(int i=0;i<100;i++){
-            Polls poll=new Polls();
-            poll.setId(i);
-            poll.setTitle("Item number "+i);
+            Polls poll=new Polls(i,"Destination "+i,"price "+i,"time "+i,"date "+i);
             mPolls.add(poll);
         }
     }

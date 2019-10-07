@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".past_poll_view"
-    tools:listitem="@layout/fragment_polls2" />
+    tools:listitem="@layout/fragment_polls_past" />

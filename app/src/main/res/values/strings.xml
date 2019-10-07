@@ -18,8 +18,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="destination">Destination :</string>
-    <string name="estimated_price">Est Price</string>
+    <string name="destination">Dest :</string>
+    <string name="estimated_price">Estimate Price</string>
     <string name="time">Time</string>
     <string name="request">ADD</string>
     <string name="price">Price</string>
@@ -27,4 +27,8 @@
     <string name="date">Date</string>
     <string name="date_p">Date</string>
     <string name="x">CLOSE</string>
+    <string name="destination_p">Destination</string>
+    <string name="seats_left">Seats Left: 4</string>
+    <string name="source_p">IIITD Main Gate 1</string>
+    <string name="source">Src :</string>
 </resources>
