@@ -84,7 +84,28 @@
             android:id="@+id/seat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/seats_left"
+            android:text="@string/traveller"
+            android:layout_margin="@dimen/card_margin"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/seat1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/traveller"
+            android:layout_margin="@dimen/card_margin"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/seat2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/traveller"
+            android:layout_margin="@dimen/card_margin"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/seat3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/traveller"
             android:layout_margin="@dimen/card_margin"
             android:textAlignment="center"/>
     </LinearLayout>
