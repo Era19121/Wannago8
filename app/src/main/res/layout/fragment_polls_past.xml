@@ -80,33 +80,73 @@
                     android:textStyle="bold|italic"/>
             </LinearLayout>
         </LinearLayout>
+
         <TextView
             android:id="@+id/seat"
-            android:layout_width="match_parent"
+            android:layout_width="816dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="@string/traveller"
-            android:layout_margin="@dimen/card_margin"
-            android:textAlignment="center"/>
-        <TextView
-            android:id="@+id/seat1"
-            android:layout_width="match_parent"
+            android:textAlignment="center" />
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/traveller"
-            android:layout_margin="@dimen/card_margin"
-            android:textAlignment="center"/>
-        <TextView
-            android:id="@+id/seat2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/traveller"
-            android:layout_margin="@dimen/card_margin"
-            android:textAlignment="center"/>
-        <TextView
-            android:id="@+id/seat3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/traveller"
-            android:layout_margin="@dimen/card_margin"
-            android:textAlignment="center"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/seat1"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                android:text="@string/traveller"
+                android:textAlignment="center" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                android:text="Add+" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="603dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/seat2"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                android:text="@string/traveller"
+                android:textAlignment="center" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                android:text="Add+" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="596dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/seat3"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                android:text="@string/traveller"
+                android:textAlignment="center" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                android:text="Add+"
+                android:textAlignment="center" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
