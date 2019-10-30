@@ -150,6 +150,6 @@
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         tools:context=".present_poll_view"
-        tools:listitem="@layout/fragment_polls_present" />
+         />
     </LinearLayout>
 </ScrollView>

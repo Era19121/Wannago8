@@ -38,11 +38,11 @@ public class PresentPollAdapter extends RecyclerView.Adapter<PresentPollAdapter.
     @Override
     public void onBindViewHolder(@NonNull PollHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.dest.setText(mValues.get(position).getDest());
-        holder.price.setText(mValues.get(position).getPrice());
-        holder.time.setText(mValues.get(position).getTime());
-        holder.date.setText(mValues.get(position).getDate());
-        holder.seats.setText("Seats Available :"+mValues.get(position).getSeat());
+        holder.dest.setText(""+mValues.get(position).getDest());
+        holder.price.setText(""+mValues.get(position).getPrice());
+        holder.time.setText(""+mValues.get(position).getTime());
+        holder.date.setText(""+mValues.get(position).getDate());
+        //holder.seats.setText("Seats Available :"+mValues.get(position).getSeat());
 
         /*holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

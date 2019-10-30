@@ -1,14 +1,14 @@
 package com.example.wannago;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.wannago.past_poll_view.OnListFragmentInteractionListener;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.wannago.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -21,11 +21,11 @@ import java.util.List;
 public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHolder> {
 
     private final List<Polls> mValues;
-    //private final OnListFragmentInteractionListener mListener;
+    private final OnListFragmentInteractionListener mListener;
 
-    public PastPollAdapter(List<Polls> items) {
+    public PastPollAdapter(List<Polls> items,OnListFragmentInteractionListener listener) {
         mValues = items;
-        //mListener = listener;
+        mListener = listener;
     }
 
     @Override
@@ -36,26 +36,26 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PollHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PollHolder holder, final int position) {
         holder.mItem = mValues.get(position);
-        holder.dest.setText(mValues.get(position).getDest());
-        holder.price.setText(mValues.get(position).getPrice());
-        holder.time.setText(mValues.get(position).getTime());
-        holder.date.setText(mValues.get(position).getDate());
-        holder.seats.setText("Seats Available :"+mValues.get(position).getSeat());
+        holder.dest.setText(""+mValues.get(position).getDest());
+        holder.price.setText(""+mValues.get(position).getPrice());
+        holder.time.setText(""+mValues.get(position).getTime());
+        holder.date.setText(""+mValues.get(position).getDate());
+        //holder.seats.setText("Seats Available :"+mValues.get(position).getSeat());
 
 
 
-        /*holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(mValues.get(position));
                 }
             }
-        });*/
+        });
 
     }
 
@@ -73,6 +73,7 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
         public final TextView time;
         public final TextView date;
         public final TextView seats;
+        public final Button btnAdd;
         public Polls mItem;
 
         public PollHolder(View view) {
@@ -83,6 +84,7 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
             time= (TextView) view.findViewById(R.id.time_r);
             date= (TextView) view.findViewById(R.id.date_r);
             seats=(TextView) view.findViewById(R.id.seat);
+            btnAdd = view.findViewById(R.id.btnAdd);
         }
 
         @Override
