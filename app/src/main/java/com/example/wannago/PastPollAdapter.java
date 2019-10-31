@@ -11,8 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wannago.dummy.DummyContent.DummyItem;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +32,7 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
     private final List<Polls> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public PastPollAdapter(List<Polls> items,OnListFragmentInteractionListener listener) {
+    public PastPollAdapter(List<Polls> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -43,37 +47,79 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
     @Override
     public void onBindViewHolder(@NonNull final PollHolder holder, final int position) {
         holder.mItem = mValues.get(position);
-        holder.dest.setText(""+mValues.get(position).getDest());
-        holder.price.setText(""+mValues.get(position).getPrice());
-        holder.time.setText(""+mValues.get(position).getTime());
-        holder.date.setText(""+mValues.get(position).getDate());
-        holder.name.setText(""+mValues.get(position).getName());
+        holder.dest.setText("" + mValues.get(position).getDest());
+        holder.price.setText("" + mValues.get(position).getPrice());
+        holder.time.setText("" + mValues.get(position).getTime());
+        holder.date.setText("" + mValues.get(position).getDate());
+        holder.name.setText("" + mValues.get(position).getName());
         //holder.seats.setText("Seats Available :"+mValues.get(position).getSeat());
-
 
 
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     //mListener.onListFragmentInteraction(mValues.get(position));
-                    Toast.makeText(v.getContext(), ""+mValues.get(position).getKey() , Toast.LENGTH_SHORT).show();
 
-                    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("polls");
+                    final long[] count = {-1};
 
-                    //Storing Added Users in Firebase
-                    Map<String,String> Added_users=new HashMap<>();
-                    Added_users.put("name",""+mValues.get(position).getName());
-                    Added_users.put("user",""+mValues.get(position).getUser());
-                    databaseReference.child(""+mValues.get(position).getParent()).child("Added_users").child("Person"+mValues.get(position).getKey()).setValue(Added_users);
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("polls");
+
+                    databaseReference.child("" + mValues.get(position).getParent()).child("Added_users").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            count[0] = dataSnapshot.getChildrenCount();
+                            if (count[0] > -1 && count[0] < 3) {
+                                //Storing Added Users in Firebase
+                                Map<String, String> Added_users = new HashMap<>();
+                                Added_users.put("name", "" + mValues.get(position).getName());
+                                Added_users.put("user", "" + mValues.get(position).getUser());
+                                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("polls");
+                                databaseReference1.child("" + mValues.get(position).getParent()).child("Added_users").child("Person" + mValues.get(position).getKey()).setValue(Added_users);
+                                Toast.makeText(v.getContext(), "Added Successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(v.getContext(), "You Exceed Maximum Limit, Cannot Add More Than 3 Persons", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    /*databaseReference.child("" + mValues.get(position).getParent()).child("Added_users").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            count[0] = dataSnapshot.getChildrenCount();
+
+                            if (count[0] > -1 && count[0] < 3) {
+                                //Storing Added Users in Firebase
+                                Map<String, String> Added_users = new HashMap<>();
+                                Added_users.put("name", "" + mValues.get(position).getName());
+                                Added_users.put("user", "" + mValues.get(position).getUser());
+                                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("polls");
+                                databaseReference1.child("" + mValues.get(position).getParent()).child("Added_users").child("Person" + mValues.get(position).getKey()).setValue(Added_users);
+                            } else {
+                                Toast.makeText(v.getContext(), "You Exceed Maximum Limit, Cannot Add More Than 3 Persons", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });*/
+
+
+
                 }
             }
         });
 
     }
-
 
 
     @Override
@@ -88,21 +134,21 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
         public final TextView time;
         public final TextView date;
         public final TextView seats;
+        public final Button btnAdd;
         public TextView name;
+        public Polls mItem;
         String added_name;
         String added_user;
-        public final Button btnAdd;
-        public Polls mItem;
 
         public PollHolder(View view) {
             super(view);
             mView = view;
             dest = (TextView) view.findViewById(R.id.dest_r);
-            price= (TextView) view.findViewById(R.id.price_r);
-            time= (TextView) view.findViewById(R.id.time_r);
-            date= (TextView) view.findViewById(R.id.date_r);
-            seats=(TextView) view.findViewById(R.id.seat);
-            name=(TextView) view.findViewById(R.id.seat3);
+            price = (TextView) view.findViewById(R.id.price_r);
+            time = (TextView) view.findViewById(R.id.time_r);
+            date = (TextView) view.findViewById(R.id.date_r);
+            seats = (TextView) view.findViewById(R.id.seat);
+            name = (TextView) view.findViewById(R.id.seat3);
             btnAdd = view.findViewById(R.id.btnAdd);
         }
 

@@ -69,11 +69,13 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
 
                 for (final DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting artist
-                    Polls polls = postSnapshot.getValue(Polls.class);
-                    final String parent = postSnapshot.getKey();
+                    try {
+                        Polls polls = postSnapshot.getValue(Polls.class);
+                        final String parent = postSnapshot.getKey();
+
 
                     if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("notactive")
-                            && polls.getCreater_uid() == 1) {
+                            ) {
 
                         postSnapshot.getRef().child("requested").addValueEventListener(new ValueEventListener() {
                             @Override
@@ -100,7 +102,9 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                             public void onCancelled(DatabaseError databaseError) {
 
                             }
+
                         });
+
 
                         /*//fetching requested user and name from firebase
                         try {
@@ -118,10 +122,16 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                         //add polls to Adapter
                         mPolls.add(polls);*/
                     }
+                    }
+                    catch(Exception e){
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
+
                 //commentsAdapter = new CommentsAdapter(TaskDetailsActivity.this, commentsEntities);
                 //if (mPolls != null && mPolls.size() > 0)
-                 //   list.setAdapter(new PastPollAdapter(mPolls, past_poll_view.this));
+                //   list.setAdapter(new PastPollAdapter(mPolls, past_poll_view.this));
             }
 
             @Override

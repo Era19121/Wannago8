@@ -10,7 +10,7 @@ class Polls {
     private String time;
     private String date;
     private String name;
-    private Long user;
+    private long user;
     private String key;
     private String parent;
 
@@ -24,7 +24,7 @@ class Polls {
 
     private long seat = 4;
     private String status;
-    private long creater_uid;
+    private String creater_uid;
     private List<AddedUserEntity> addedUserEntities;
 
     public Polls() {
@@ -74,11 +74,11 @@ class Polls {
         this.name = name;
     }
 
-    public Long getUser() {
+    public long getUser() {
         return user;
     }
 
-    public void setUser(Long user) {
+    public void setUser(long user) {
         this.user = user;
     }
 
@@ -90,11 +90,11 @@ class Polls {
         this.key = key;
     }
 
-    public long getCreater_uid() {
+    public String getCreater_uid() {
         return creater_uid;
     }
 
-    public void setCreater_uid(long creater_uid) {
+    public void setCreater_uid(String creater_uid) {
         this.creater_uid = creater_uid;
     }
 
