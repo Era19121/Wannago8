@@ -2,19 +2,14 @@ package com.example.wannago;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wannago.dummy.DummyContent.DummyItem;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,11 +27,11 @@ import java.util.List;
  */
 public class past_poll_view extends Fragment implements OnListFragmentInteractionListener {
 
+    DatabaseReference dbPolls;
+    RecyclerView list;
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    DatabaseReference dbPolls;
     private List<Polls> mPolls;
-    RecyclerView list;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -56,7 +51,7 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_polls_list_past, container, false);
         list = view.findViewById(R.id.list);
-        mPolls= new ArrayList<>();
+        mPolls = new ArrayList<>();
         // Set the adapter
         /*if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -75,8 +70,22 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting artist
                     Polls polls = postSnapshot.getValue(Polls.class);
-                    if (polls.getStatus()!=null && polls.getStatus().equalsIgnoreCase("active")
-                            && polls.getCreater_uid() ==1) {
+                    String key=postSnapshot.getKey();
+                    try {
+                        String requestName = postSnapshot.child("requested").child("name").getValue(String.class);
+                        Long requestUser = postSnapshot.child("requested").child("user").getValue(Long.class);
+                        if (requestName != null && requestUser != null) {
+                            polls.setName(requestName);
+                            polls.setUser(requestUser.toString());
+                            polls.setKey(key);
+                        }
+                    }
+                    catch (Exception e){
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("active")
+                            && polls.getCreater_uid() != 1) { //to be change later creater_uid
                         mPolls.add(polls);
                     }
                 }

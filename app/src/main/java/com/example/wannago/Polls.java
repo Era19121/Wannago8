@@ -9,6 +9,11 @@ class Polls {
     private String price;
     private String time;
     private String date;
+    private String name;
+    private String user;
+    private String key;
+
+
     private long seat = 4;
     private String status;
     private long creater_uid;
@@ -25,16 +30,12 @@ class Polls {
         this.date = date;
     }
 
-    public void setDest(String dest) {
-        this.dest = dest;
-    }
-
-    public void setSeat(long seat) {
-        this.seat = seat;
-    }
-
     public String getDest() {
         return dest;
+    }
+
+    public void setDest(String dest) {
+        this.dest = dest;
     }
 
     public String getPrice() {
@@ -57,6 +58,30 @@ class Polls {
         this.status = status;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public long getCreater_uid() {
         return creater_uid;
     }
@@ -75,6 +100,10 @@ class Polls {
 
     public long getSeat() {
         return seat;
+    }
+
+    public void setSeat(long seat) {
+        this.seat = seat;
     }
 
     public int getId() {
