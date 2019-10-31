@@ -81,6 +81,7 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                                 mPolls.clear();
                                 for (DataSnapshot postSnapshot1 : dataSnapshot.getChildren()) {
                                     try {
+                                        //fetching values
                                         Polls requested_polls = postSnapshot1.getValue(Polls.class);
                                         String key = postSnapshot1.getKey();
                                         requested_polls.setParent(parent);
