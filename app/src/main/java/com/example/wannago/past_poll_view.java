@@ -66,32 +66,60 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
         dbPolls.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mPolls.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                for (final DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting artist
                     Polls polls = postSnapshot.getValue(Polls.class);
-                    String key=postSnapshot.getKey();
-                    try {
-                        String requestName = postSnapshot.child("requested").child("name").getValue(String.class);
-                        Long requestUser = postSnapshot.child("requested").child("user").getValue(Long.class);
-                        if (requestName != null && requestUser != null) {
-                            polls.setName(requestName);
-                            polls.setUser(requestUser.toString());
-                            polls.setKey(key);
-                        }
-                    }
-                    catch (Exception e){
-                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    String key = postSnapshot.getKey();
 
-                    if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("active")
-                            && polls.getCreater_uid() != 1) { //to be change later creater_uid
-                        mPolls.add(polls);
+                    if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("notactive")
+                            && polls.getCreater_uid() == 1) {
+
+                        postSnapshot.getRef().child("requested").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                mPolls.clear();
+                                for (DataSnapshot postSnapshot1 : dataSnapshot.getChildren()) {
+                                    try {
+                                        Polls requested_polls = postSnapshot1.getValue(Polls.class);
+                                        String key = postSnapshot1.getKey();
+                                        requested_polls.setKey(key);
+                                        mPolls.add(requested_polls);
+                                    } catch (Exception e) {
+                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                if (mPolls != null && mPolls.size() > 0)
+                                    list.setAdapter(new PastPollAdapter(mPolls, past_poll_view.this));
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        /*//fetching requested user and name from firebase
+                        try {
+                            String requestName = postSnapshot.child("requested").child("name").getValue(String.class);
+                            Long requestUser = postSnapshot.child("requested").child("user").getValue(Long.class);
+                            if (requestName != null && requestUser != null) {
+                                polls.setName(requestName);
+                                polls.setUser(requestUser.toString());
+                                polls.setKey(key);
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        //add polls to Adapter
+                        mPolls.add(polls);*/
                     }
                 }
                 //commentsAdapter = new CommentsAdapter(TaskDetailsActivity.this, commentsEntities);
-                if (mPolls != null && mPolls.size() > 0)
-                    list.setAdapter(new PastPollAdapter(mPolls, past_poll_view.this));
+                //if (mPolls != null && mPolls.size() > 0)
+                 //   list.setAdapter(new PastPollAdapter(mPolls, past_poll_view.this));
             }
 
             @Override

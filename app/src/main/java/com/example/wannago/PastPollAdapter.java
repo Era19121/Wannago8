@@ -59,7 +59,7 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     //mListener.onListFragmentInteraction(mValues.get(position));
-                    //Toast.makeText(v.getContext(), ""+mValues.get(position).getUser() , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), ""+mValues.get(position).getKey() , Toast.LENGTH_SHORT).show();
 
                     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("polls");
 
@@ -67,7 +67,7 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
                     Map<String,String> Added_users=new HashMap<>();
                     Added_users.put("name",""+mValues.get(position).getName());
                     Added_users.put("user",""+mValues.get(position).getUser());
-                    databaseReference.child("p1").child("Added_users").child(""+mValues.get(position).getKey()).setValue(Added_users);
+                    databaseReference.child("p1").child("Added_users").child("Person"+mValues.get(position).getKey()).setValue(Added_users);
                 }
             }
         });
