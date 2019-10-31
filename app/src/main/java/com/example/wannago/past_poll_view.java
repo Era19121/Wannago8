@@ -70,7 +70,7 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                 for (final DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting artist
                     Polls polls = postSnapshot.getValue(Polls.class);
-                    String key = postSnapshot.getKey();
+                    final String parent = postSnapshot.getKey();
 
                     if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("notactive")
                             && polls.getCreater_uid() == 1) {
@@ -83,6 +83,7 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                                     try {
                                         Polls requested_polls = postSnapshot1.getValue(Polls.class);
                                         String key = postSnapshot1.getKey();
+                                        requested_polls.setParent(parent);
                                         requested_polls.setKey(key);
                                         mPolls.add(requested_polls);
                                     } catch (Exception e) {

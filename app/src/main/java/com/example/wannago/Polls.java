@@ -12,7 +12,15 @@ class Polls {
     private String name;
     private Long user;
     private String key;
+    private String parent;
 
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
 
     private long seat = 4;
     private String status;

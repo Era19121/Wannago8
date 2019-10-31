@@ -67,7 +67,7 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
                     Map<String,String> Added_users=new HashMap<>();
                     Added_users.put("name",""+mValues.get(position).getName());
                     Added_users.put("user",""+mValues.get(position).getUser());
-                    databaseReference.child("p1").child("Added_users").child("Person"+mValues.get(position).getKey()).setValue(Added_users);
+                    databaseReference.child(""+mValues.get(position).getParent()).child("Added_users").child("Person"+mValues.get(position).getKey()).setValue(Added_users);
                 }
             }
         });
