@@ -63,6 +63,7 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
 
                     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("polls");
 
+                    //Storing Added Users in Firebase
                     Map<String,String> Added_users=new HashMap<>();
                     Added_users.put("name",""+mValues.get(position).getName());
                     Added_users.put("user",""+mValues.get(position).getUser());
