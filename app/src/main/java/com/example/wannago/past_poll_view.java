@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,9 +41,14 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
      */
     public past_poll_view() {
     }
+    FirebaseAuth mFirebaseAuth;
+    FirebaseUser user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        mFirebaseAuth=FirebaseAuth.getInstance();
+        user=mFirebaseAuth.getCurrentUser();
         super.onCreate(savedInstanceState);
         dbPolls = FirebaseDatabase.getInstance().getReference("polls");
     }
@@ -74,8 +81,8 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                         final String parent = postSnapshot.getKey();
 
 
-                        if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("notactive") &&
-                                polls.getCreater_uid() == polls.getCreater_uid()) {
+                        if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("active") &&
+                                polls.getCreater_uid().equals(user)) {
 
                             postSnapshot.getRef().child("requested").addValueEventListener(new ValueEventListener() {
                                 @Override

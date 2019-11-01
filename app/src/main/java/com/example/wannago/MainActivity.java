@@ -20,12 +20,14 @@ import androidx.fragment.app.FragmentManager;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //variables
     private Button past;
     private Button present;
+    private Button map;
     private static int frag=0;
     private static FragmentManager fm;
     private static Fragment f;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity
         }
         past=(Button)findViewById(R.id.past_button);
         present=(Button)findViewById(R.id.present_button);
+        map=(Button)findViewById(R.id.map_button);
         past.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +85,13 @@ public class MainActivity extends AppCompatActivity
                     fm.beginTransaction().add(R.id.fragment_container,f).commit();
                     MainActivity.frag=0;
                 }
+            }
+        });
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), locattion.class);
+                startActivity(myIntent);
             }
         });
     }

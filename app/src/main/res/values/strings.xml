@@ -32,4 +32,6 @@
     <string name="source_p">IIITD Main Gate 1</string>
     <string name="source">Src :</string>
     <string name="traveller">Traveller</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps2">Map</string>
 </resources>

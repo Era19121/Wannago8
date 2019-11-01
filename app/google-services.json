@@ -15,7 +15,23 @@
       },
       "oauth_client": [
         {
-          "client_id": "1077196365166-nu965n84njtgrphhat1uia7cvbrb6den.apps.googleusercontent.com",
+          "client_id": "1077196365166-tinp24mcte6hojtf82158umrqf76jigl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.appproject",
+            "certificate_hash": "066c72dfe5a97d797df1fcb961269e1ad62ce17e"
+          }
+        },
+        {
+          "client_id": "1077196365166-en5mir9ofappgla6j1md53incis98rm8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.appproject",
+            "certificate_hash": "392b1a54a172e8d7feeef38fac37715925ec0ceb"
+          }
+        },
+        {
+          "client_id": "1077196365166-prg2ii7ov3klj12ssdqckdd937pi99g7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.appproject",
@@ -126,19 +142,27 @@
       },
       "oauth_client": [
         {
-          "client_id": "1077196365166-6rmehjc2dhcftg07dl48ld6pd4vl3q3s.apps.googleusercontent.com",
+          "client_id": "1077196365166-dss2levcn9k1pfdg2kbraso5ldponk71.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.wannago",
-            "certificate_hash": "19e20ac681f65fa083e1df94f23f9ed19f4b8e30"
+            "certificate_hash": "a861c095bc6cb59e0abbfa6c5802814547e55700"
           }
         },
         {
-          "client_id": "1077196365166-f2usokr5s370agnm15i68fh1j6f32s8k.apps.googleusercontent.com",
+          "client_id": "1077196365166-amh92ui7huf49ofljrcshbketoh0f8a5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.wannago",
             "certificate_hash": "6c9584d846905d57eb95d1d41478ebec5a3222c4"
+          }
+        },
+        {
+          "client_id": "1077196365166-r3o3mtele3k5kcjbsd2m7e8bhj5hn3pg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wannago",
+            "certificate_hash": "19e20ac681f65fa083e1df94f23f9ed19f4b8e30"
           }
         },
         {

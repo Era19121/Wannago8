@@ -41,5 +41,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/present_button" />
+        <Button
+            android:id="@+id/map_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Good To Go" />
     </LinearLayout>
 </LinearLayout>
