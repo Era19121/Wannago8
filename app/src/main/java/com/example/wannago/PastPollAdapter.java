@@ -65,19 +65,31 @@ public class PastPollAdapter extends RecyclerView.Adapter<PastPollAdapter.PollHo
 
                     final long[] count = {-1};
 
+                    //Database reference for Creater details
+                    DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("polls");
+
+                    Map<String, String> creater = new HashMap<>();
+                    creater.put("name", null);
+                    creater.put("user", "" + mValues.get(position).getCreater_uid());
+                    creater.put("poll", "" + mValues.get(position).getParent());
+
+                    databaseReference2.child("" + mValues.get(position).getParent()).child("Added_users").child("" + mValues.get(position).getCreater_uid()).setValue(creater);
+
+                    //Database reference for Added_users details
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("polls");
 
                     databaseReference.child("" + mValues.get(position).getParent()).child("Added_users").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             count[0] = dataSnapshot.getChildrenCount();
-                            if (count[0] > -1 && count[0] < 3) {
+                            if (count[0] > -1 && count[0] <= 3) {
                                 //Storing Added Users in Firebase
                                 Map<String, String> Added_users = new HashMap<>();
                                 Added_users.put("name", "" + mValues.get(position).getName());
                                 Added_users.put("user", "" + mValues.get(position).getUser());
+                                Added_users.put("poll", "" + mValues.get(position).getParent());
                                 DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("polls");
-                                databaseReference1.child("" + mValues.get(position).getParent()).child("Added_users").child("Person" + mValues.get(position).getKey()).setValue(Added_users);
+                                databaseReference1.child("" + mValues.get(position).getParent()).child("Added_users").child("" + mValues.get(position).getUser()).setValue(Added_users);
                                 Toast.makeText(v.getContext(), "Added Successfully", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(v.getContext(), "You Exceed Maximum Limit, Cannot Add More Than 3 Persons", Toast.LENGTH_SHORT).show();

@@ -70,40 +70,41 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
                 for (final DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //getting artist
                     try {
-                        Polls polls = postSnapshot.getValue(Polls.class);
+                        final Polls polls = postSnapshot.getValue(Polls.class);
                         final String parent = postSnapshot.getKey();
 
 
-                    if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("notactive")
-                            ) {
+                        if (polls.getStatus() != null && polls.getStatus().equalsIgnoreCase("notactive") &&
+                                polls.getCreater_uid() == polls.getCreater_uid()) {
 
-                        postSnapshot.getRef().child("requested").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                mPolls.clear();
-                                for (DataSnapshot postSnapshot1 : dataSnapshot.getChildren()) {
-                                    try {
-                                        //fetching values
-                                        Polls requested_polls = postSnapshot1.getValue(Polls.class);
-                                        String key = postSnapshot1.getKey();
-                                        requested_polls.setParent(parent);
-                                        requested_polls.setKey(key);
-                                        mPolls.add(requested_polls);
-                                    } catch (Exception e) {
-                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            postSnapshot.getRef().child("requested").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    mPolls.clear();
+                                    for (DataSnapshot postSnapshot1 : dataSnapshot.getChildren()) {
+                                        try {
+                                            //fetching values
+                                            Polls requested_polls = postSnapshot1.getValue(Polls.class);
+                                            String key = postSnapshot1.getKey();
+                                            requested_polls.setParent(parent);
+                                            requested_polls.setKey(key);
+                                            requested_polls.setCreater_uid(polls.getCreater_uid());
+                                            mPolls.add(requested_polls);
+                                        } catch (Exception e) {
+                                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
                                     }
+                                    if (mPolls != null && mPolls.size() > 0)
+                                        list.setAdapter(new PastPollAdapter(mPolls, past_poll_view.this));
                                 }
-                                if (mPolls != null && mPolls.size() > 0)
-                                    list.setAdapter(new PastPollAdapter(mPolls, past_poll_view.this));
-                            }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                            }
+                                }
 
-                        });
+                            });
 
 
                         /*//fetching requested user and name from firebase
@@ -121,9 +122,8 @@ public class past_poll_view extends Fragment implements OnListFragmentInteractio
 
                         //add polls to Adapter
                         mPolls.add(polls);*/
-                    }
-                    }
-                    catch(Exception e){
+                        }
+                    } catch (Exception e) {
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }

@@ -10,7 +10,7 @@ class Polls {
     private String time;
     private String date;
     private String name;
-    private long user;
+    private String user;
     private String key;
     private String parent;
 
@@ -74,11 +74,11 @@ class Polls {
         this.name = name;
     }
 
-    public long getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(long user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
